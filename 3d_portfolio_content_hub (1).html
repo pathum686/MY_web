@@ -48,7 +48,6 @@
             color: #f3f4f6;
             overflow-x: hidden;
         }
-        /* Custom Glowing and Glassmorphism Effects */
         .glow-primary {
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
         }
@@ -66,7 +65,6 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        /* Canvas hover & interaction styling */
         .model-canvas-container {
             position: relative;
             width: 100%;
@@ -76,7 +74,6 @@
         .model-canvas-container:active {
             cursor: grabbing;
         }
-        /* Scrollbar styling */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -94,15 +91,14 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-cyber-primary selection:text-black">
 
-    <!-- Header / Navigation Bar -->
+    <!-- Header -->
     <header class="sticky top-0 z-40 glass-panel border-b border-cyber-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
                 <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('hero')">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyber-primary via-cyber-secondary to-cyber-accent p-[2px] flex items-center justify-center glow-primary">
                         <div class="w-full h-full bg-cyber-bg rounded-[10px] flex items-center justify-center">
-                            <i class="fa-solid font-bold text-cyber-primary text-xl">3D</i>
+                            <span class="font-bold text-cyber-primary text-xl">3D</span>
                         </div>
                     </div>
                     <div>
@@ -111,7 +107,6 @@
                     </div>
                 </div>
 
-                <!-- Desktop Nav Links -->
                 <nav class="hidden md:flex items-center space-x-7 text-sm font-medium">
                     <a href="#gallery" onclick="setMainTypeFilter('all')" class="text-gray-300 hover:text-cyber-primary transition-colors flex items-center gap-2">
                         <i class="fa-solid fa-layer-group text-xs text-cyber-primary"></i> Showcase
@@ -130,62 +125,56 @@
                     </a>
                 </nav>
 
-                <!-- Actions: Upload Modal Trigger -->
                 <div class="hidden lg:flex items-center space-x-3">
                     <button onclick="openUploadModal()" class="px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl bg-gradient-to-r from-cyber-primary to-teal-400 text-black hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all flex items-center gap-2">
                         <i class="fa-solid fa-cloud-arrow-up text-sm"></i> Upload Content
                     </button>
                 </div>
 
-                <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center gap-2">
                     <button onclick="openUploadModal()" class="p-2.5 rounded-lg bg-cyber-primary text-black text-xs font-bold">
                         <i class="fa-solid fa-plus"></i>
                     </button>
-                    <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-400 hover:text-white hover:bg-cyber-card focus:outline-none">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-400 hover:text-white hover:bg-cyber-card focus:outline-none" onclick="toggleMobileMenu()">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Navigation Drawer -->
         <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-cyber-border px-4 pt-2 pb-6 space-y-3">
-            <a href="#gallery" onclick="setMainTypeFilter('all')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
+            <a href="#gallery" onclick="setMainTypeFilter('all'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
                 <i class="fa-solid fa-layer-group mr-2 text-cyber-primary"></i> All Works
             </a>
-            <a href="#gallery" onclick="setMainTypeFilter('3d')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
+            <a href="#gallery" onclick="setMainTypeFilter('3d'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
                 <i class="fa-solid fa-cube mr-2"></i> 3D Models
             </a>
-            <a href="#gallery" onclick="setMainTypeFilter('image')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
+            <a href="#gallery" onclick="setMainTypeFilter('image'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
                 <i class="fa-solid fa-image mr-2 text-cyber-accent"></i> 2D Artwork & Images
             </a>
-            <a href="#gallery" onclick="setMainTypeFilter('video')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
+            <a href="#gallery" onclick="setMainTypeFilter('video'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
                 <i class="fa-solid fa-film mr-2 text-cyber-secondary"></i> Movies & Videos
             </a>
-            <a href="#youtube" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
+            <a href="#youtube" onclick="toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-primary hover:bg-cyber-card">
                 <i class="fa-brands fa-youtube mr-2 text-red-500"></i> YouTube Channel
             </a>
             <div class="pt-2">
-                <button onclick="openUploadModal()" class="w-full py-3 text-xs font-bold uppercase tracking-wider rounded-lg bg-cyber-primary text-black flex items-center justify-center gap-2">
+                <button onclick="openUploadModal(); toggleMobileMenu();" class="w-full py-3 text-xs font-bold uppercase tracking-wider rounded-lg bg-cyber-primary text-black flex items-center justify-center gap-2">
                     <i class="fa-solid fa-cloud-arrow-up"></i> Upload New Media
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
+    <!-- Main Content -->
     <main class="flex-grow">
-        <!-- Section 1: Hero Section -->
+        <!-- Hero Section -->
         <section id="hero" class="relative overflow-hidden py-16 lg:py-24 border-b border-cyber-border/50">
-            <!-- Background Decorative Glows -->
             <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyber-secondary/20 rounded-full blur-[140px] pointer-events-none"></div>
             <div class="absolute bottom-0 right-10 w-[400px] h-[400px] bg-cyber-primary/15 rounded-full blur-[120px] pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
-                    <!-- Left Hero Content -->
                     <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyber-primary/10 border border-cyber-primary/30 text-cyber-primary text-xs font-mono tracking-wider uppercase">
                             <span class="w-2 h-2 rounded-full bg-cyber-primary animate-pulse"></span>
@@ -207,7 +196,6 @@
                             </button>
                         </div>
 
-                        <!-- Content Counter Stats -->
                         <div class="grid grid-cols-3 gap-4 pt-8 border-t border-cyber-border/80 max-w-lg mx-auto lg:mx-0">
                             <div>
                                 <div id="stat-3d-count" class="text-2xl font-bold text-white font-mono">0</div>
@@ -224,7 +212,6 @@
                         </div>
                     </div>
 
-                    <!-- Right Hero Interactive 3D Canvas -->
                     <div class="lg:col-span-5 relative">
                         <div class="w-full h-[360px] sm:h-[420px] rounded-2xl glass-panel border border-cyber-border p-2 relative overflow-hidden group shadow-2xl">
                             <div id="hero-3d-canvas" class="w-full h-full rounded-xl bg-cyber-bg/90 relative">
@@ -234,21 +221,17 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Unified Showcase Gallery (3D, 2D Images & Videos) -->
+        <!-- Gallery Section -->
         <section id="gallery" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Section Header & Filter Controls -->
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
                 <div>
                     <div class="text-cyber-primary text-xs font-mono uppercase tracking-widest mb-1"><i class="fa-solid fa-photo-film mr-1"></i> Media Vault</div>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Portfolio Showcase</h2>
                 </div>
-
-                <!-- Search Input -->
                 <div class="flex items-center gap-3">
                     <div class="relative w-full sm:w-64">
                         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
@@ -260,7 +243,6 @@
                 </div>
             </div>
 
-            <!-- Media Type Tabs (All / 3D Models / 2D Images / Videos) -->
             <div class="flex flex-wrap items-center justify-between border-b border-cyber-border/70 pb-4 mb-8 gap-4">
                 <div class="flex flex-wrap gap-2" id="type-filter-tabs">
                     <button onclick="setMainTypeFilter('all')" data-type="all" class="type-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cyber-primary text-black flex items-center gap-2">
@@ -276,19 +258,10 @@
                         <i class="fa-solid fa-film text-cyber-secondary"></i> Movies & Videos (<span id="count-video">0</span>)
                     </button>
                 </div>
-
-                <!-- Sub-Category Tag Filter Pills -->
-                <div id="category-tag-pills" class="flex flex-wrap gap-1.5">
-                    <!-- Populated dynamically via JS -->
-                </div>
             </div>
 
-            <!-- Portfolio Gallery Grid Container -->
-            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dynamically populated Cards -->
-            </div>
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 
-            <!-- Empty State Display -->
             <div id="empty-state" class="hidden text-center py-16 glass-panel rounded-2xl border border-cyber-border mt-4">
                 <i class="fa-solid fa-folder-open text-4xl text-gray-600 mb-3"></i>
                 <h3 class="text-lg font-bold text-gray-300">No items found</h3>
@@ -299,13 +272,12 @@
             </div>
         </section>
 
-        <!-- Section 3: YouTube Channel Spotlight Section -->
+        <!-- YouTube Section -->
         <section id="youtube" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-cyber-border relative overflow-hidden">
                 <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-red-600/10 rounded-full blur-[100px] pointer-events-none"></div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-                    <!-- YT Channel Info -->
                     <div class="lg:col-span-5 space-y-6">
                         <div class="flex items-center gap-4">
                             <div class="relative">
@@ -328,7 +300,6 @@
                             Subscribe to my YouTube channel for weekly Blender & Unreal Engine 5 tutorials, speed art speedpaints, time-lapse 3D sculpting, and official CGI film releases!
                         </p>
 
-                        <!-- Channel Stats Grid -->
                         <div class="grid grid-cols-3 gap-3 bg-cyber-bg/70 p-4 rounded-xl border border-white/5 text-center">
                             <div>
                                 <div class="text-xl font-bold text-white">48.5K</div>
@@ -344,7 +315,6 @@
                             </div>
                         </div>
 
-                        <!-- Channel Actions -->
                         <div class="flex items-center gap-4">
                             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center gap-2 text-sm">
                                 <i class="fa-brands fa-youtube text-lg"></i> Subscribe Now
@@ -355,7 +325,6 @@
                         </div>
                     </div>
 
-                    <!-- YT Featured Player -->
                     <div class="lg:col-span-7">
                         <div class="relative w-full aspect-video rounded-2xl overflow-hidden glass-panel border border-cyber-border shadow-2xl">
                             <iframe id="yt-featured-iframe" class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -369,7 +338,7 @@
             </div>
         </section>
 
-        <!-- Section 4: Contact Form -->
+        <!-- Contact Section -->
         <section id="contact" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-cyber-border">
                 <div class="text-center max-w-2xl mx-auto mb-10">
@@ -389,7 +358,6 @@
                             <input type="email" required placeholder="alex@studio.com" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyber-primary transition">
                         </div>
                     </div>
-
                     <div>
                         <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">Project Scope</label>
                         <select class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyber-primary transition">
@@ -399,12 +367,10 @@
                             <option>YouTube Sponsorship & Collab</option>
                         </select>
                     </div>
-
                     <div>
                         <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">Message</label>
                         <textarea rows="4" required placeholder="Tell me about your project scope, timeline, and goals..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyber-primary transition"></textarea>
                     </div>
-
                     <button type="submit" class="w-full py-4 bg-gradient-to-r from-cyber-primary via-teal-400 to-cyber-secondary text-black font-extrabold text-sm uppercase tracking-wider rounded-xl shadow-lg hover:brightness-110 transition glow-primary">
                         Send Message <i class="fa-solid fa-paper-plane ml-2"></i>
                     </button>
@@ -413,7 +379,7 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="border-t border-cyber-border glass-panel py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center space-x-3">
@@ -422,7 +388,6 @@
                 </div>
                 <span class="text-gray-400 text-xs font-mono">© 2026 NEXUS STUDIOS. ALL RIGHTS RESERVED.</span>
             </div>
-
             <div class="flex items-center space-x-6 text-gray-400">
                 <a href="https://youtube.com" target="_blank" class="hover:text-red-500 transition"><i class="fa-brands fa-youtube text-lg"></i></a>
                 <a href="#" class="hover:text-cyber-primary transition"><i class="fa-brands fa-x-twitter text-lg"></i></a>
@@ -432,22 +397,17 @@
         </div>
     </footer>
 
-
-    <!-- MODALS -->
-
-    <!-- UNIFIED UPLOAD MODAL (3D Models, 2D Artwork/Images, Movies) -->
+    <!-- Upload Modal -->
     <div id="uploadModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden">
         <div class="glass-panel w-full max-w-xl rounded-2xl border border-cyber-border p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal('uploadModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-
             <h3 class="text-xl font-bold text-white mb-1 flex items-center gap-2">
                 <i class="fa-solid fa-cloud-arrow-up text-cyber-primary"></i> Upload Content To Vault
             </h3>
             <p class="text-xs text-gray-400 mb-6">Select media type to upload 3D models, 2D artwork images, or video links.</p>
 
-            <!-- Media Type Selector Switcher -->
             <div class="grid grid-cols-3 gap-2 p-1 bg-cyber-bg rounded-xl border border-cyber-border mb-6">
                 <button type="button" onclick="setUploadType('3d')" id="up-type-3d" class="py-2 text-xs font-bold rounded-lg bg-cyber-primary text-black transition flex items-center justify-center gap-1.5">
                     <i class="fa-solid fa-cube"></i> 3D Model
@@ -462,14 +422,10 @@
 
             <form onsubmit="handleFormUploadSubmit(event)" class="space-y-4">
                 <input type="hidden" id="upload-media-type" value="3d">
-
-                <!-- Title Input -->
                 <div>
                     <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">Title / Name</label>
                     <input type="text" id="upload-title" required placeholder="e.g. Cyberpunk Drone concept" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cyber-primary">
                 </div>
-
-                <!-- Category Input -->
                 <div>
                     <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">Category Tag</label>
                     <select id="upload-category" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cyber-primary">
@@ -480,842 +436,243 @@
                         <option value="Concept Art">Concept Art</option>
                     </select>
                 </div>
-
-                <!-- DYNAMIC FIELD FOR 3D FILE UPLOAD -->
-                <div id="field-3d" class="upload-type-field">
-                    <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">3D Model File (.gltf, .glb, .obj)</label>
-                    <div id="drop-zone-3d" class="border-2 border-dashed border-cyber-border hover:border-cyber-primary rounded-xl p-5 text-center cursor-pointer transition bg-cyber-bg/50">
-                        <i class="fa-solid fa-cube text-3xl text-cyber-primary mb-2"></i>
-                        <p class="text-xs text-gray-300">Click or drag & drop 3D file here</p>
-                        <p class="text-[10px] text-gray-500 mt-1">Supports GLTF, GLB, OBJ meshes</p>
-                        <input type="file" id="file-input-3d" accept=".gltf,.glb,.obj" class="hidden" onchange="previewFileSelected(this, 'file-3d-name')">
-                        <div id="file-3d-name" class="mt-2 text-xs font-mono text-cyber-primary hidden"></div>
-                    </div>
+                <div id="dynamic-upload-field">
+                    <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">Select 3D File (.gltf, .glb, .obj)</label>
+                    <input type="file" id="upload-file-input" accept=".gltf,.glb,.obj" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-xs file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-cyber-primary file:text-black hover:file:brightness-110">
                 </div>
-
-                <!-- DYNAMIC FIELD FOR 2D IMAGE UPLOAD OR URL -->
-                <div id="field-image" class="upload-type-field hidden space-y-3">
-                    <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider">Image File or Image URL</label>
-                    
-                    <!-- Option A: File Upload -->
-                    <div id="drop-zone-img" class="border-2 border-dashed border-cyber-border hover:border-cyber-accent rounded-xl p-4 text-center cursor-pointer transition bg-cyber-bg/50">
-                        <i class="fa-solid fa-image text-3xl text-cyber-accent mb-1"></i>
-                        <p class="text-xs text-gray-300">Upload Image File (.jpg, .png, .webp, .gif)</p>
-                        <input type="file" id="file-input-img" accept="image/*" class="hidden" onchange="handleImageFileSelect(this)">
-                    </div>
-
-                    <div class="text-center text-[10px] text-gray-500 font-mono">— OR USE DIRECT URL —</div>
-
-                    <!-- Option B: Direct Image URL -->
-                    <input type="url" id="upload-image-url" oninput="previewImageUrl(this.value)" placeholder="https://images.unsplash.com/photo-..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2 text-white text-xs focus:outline-none focus:border-cyber-accent">
-
-                    <!-- Image Preview Container -->
-                    <div id="img-preview-box" class="hidden h-36 w-full rounded-xl border border-cyber-border overflow-hidden bg-black relative">
-                        <img id="img-preview-element" src="" class="w-full h-full object-contain">
-                        <span class="absolute top-2 left-2 bg-black/70 px-2 py-0.5 rounded text-[10px] text-cyber-accent">Preview</span>
-                    </div>
-                </div>
-
-                <!-- DYNAMIC FIELD FOR YOUTUBE / VIDEO URL -->
-                <div id="field-video" class="upload-type-field hidden">
-                    <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">YouTube Video URL or ID</label>
-                    <input type="text" id="upload-video-url" placeholder="https://www.youtube.com/watch?v=..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cyber-secondary">
-                    <p class="text-[10px] text-gray-500 mt-1">Provide any public YouTube video link to embed in video reel.</p>
-                </div>
-
-                <!-- Description Input -->
                 <div>
-                    <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">Description / Notes</label>
-                    <textarea id="upload-description" rows="2" placeholder="Brief info about tools used, polygon count, resolution, etc." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2 text-white text-xs focus:outline-none focus:border-cyber-primary"></textarea>
+                    <label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">Description</label>
+                    <textarea id="upload-desc" rows="3" placeholder="Brief info about your creation..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-cyber-primary"></textarea>
                 </div>
-
-                <div class="pt-2 flex gap-3">
-                    <button type="button" onclick="closeModal('uploadModal')" class="w-1/2 py-2.5 glass-panel text-gray-300 text-xs font-bold uppercase rounded-xl">Cancel</button>
-                    <button type="submit" class="w-1/2 py-2.5 bg-cyber-primary text-black text-xs font-bold uppercase rounded-xl hover:brightness-110 transition">Save & Publish</button>
-                </div>
+                <button type="submit" class="w-full py-3 bg-cyber-primary text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:brightness-110 transition">
+                    Upload & Publish <i class="fa-solid fa-cloud-arrow-up ml-1"></i>
+                </button>
             </form>
         </div>
     </div>
 
-    <!-- 2D IMAGE LIGHTBOX / ARTWORK VIEWER MODAL -->
-    <div id="imageViewerModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl hidden">
-        <div class="max-w-5xl w-full glass-panel rounded-2xl border border-cyber-border overflow-hidden relative shadow-2xl flex flex-col max-h-[90vh]">
-            <!-- Header bar -->
-            <div class="p-4 border-b border-cyber-border flex items-center justify-between bg-cyber-card">
-                <div>
-                    <h4 id="img-modal-title" class="font-bold text-white text-base">Artwork Title</h4>
-                    <span id="img-modal-tag" class="text-[10px] text-cyber-accent font-mono">Concept Art</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <a id="img-modal-download" href="#" target="_blank" download class="px-3 py-1.5 bg-cyber-bg hover:bg-cyber-primary hover:text-black text-gray-300 text-xs rounded-lg transition border border-white/10 flex items-center gap-1.5">
-                        <i class="fa-solid fa-download"></i> View Full Original
-                    </a>
-                    <button onclick="closeModal('imageViewerModal')" class="text-gray-400 hover:text-white p-1">
-                        <i class="fa-solid fa-xmark text-xl"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Image Viewport -->
-            <div class="p-2 bg-black/80 flex-grow flex items-center justify-center overflow-auto min-h-[300px]">
-                <img id="img-modal-src" src="" alt="Artwork Preview" class="max-h-[65vh] w-auto object-contain rounded-lg shadow-2xl transition-transform duration-300">
-            </div>
-
-            <!-- Description Footer -->
-            <div class="p-4 border-t border-cyber-border bg-cyber-card text-xs text-gray-300 flex justify-between items-center">
-                <p id="img-modal-desc" class="text-gray-400">Artwork description details...</p>
-                <span class="font-mono text-[10px] text-gray-500">Nexus Digital Vault</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- VIDEO PLAYER MODAL -->
-    <div id="videoPlayerModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg hidden">
-        <div class="w-full max-w-4xl glass-panel rounded-2xl border border-cyber-border overflow-hidden relative shadow-2xl">
-            <div class="p-4 border-b border-cyber-border flex items-center justify-between">
-                <h4 id="video-modal-title" class="font-bold text-white text-base">Video Title</h4>
-                <button onclick="closeModal('videoPlayerModal')" class="text-gray-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-            </div>
-            <div class="aspect-video w-full bg-black">
-                <iframe id="video-modal-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Notification Message Container -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-cyber-primary px-5 py-3 rounded-xl text-white text-sm font-medium transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3">
-        <i class="fa-solid fa-circle-check text-cyber-primary text-lg"></i>
-        <span id="toast-message">Action completed successfully!</span>
-    </div>
-
-
-    <!-- JAVASCRIPT & THREE.JS INTERACTIVITY -->
+    <!-- JavaScript Application Logic -->
     <script>
-        /* ==========================================================================
-           GLOBAL DATA STORES & LOCALSTORAGE PERSISTENCE
-           ========================================================================== */
-        
-        // Initial Default Catalog Items (3D Models, 2D Images, Videos)
-        const defaultMediaCatalog = [
-            // 3D MODELS
-            {
-                id: 'mod-1',
-                type: '3d',
-                title: 'Cyber Core Mech Node',
-                category: 'Sci-Fi',
-                meshType: 'torusKnot',
-                color: 0x00f0ff,
-                polyCount: '24.5K Polys',
-                author: 'Nexus3D',
-                desc: 'Interactive 3D Sci-Fi core mesh generated with procedural Three.js materials.'
-            },
-            {
-                id: 'mod-2',
-                type: '3d',
-                title: 'Vanguard Cyber Helmet',
-                category: 'Characters',
-                meshType: 'icosahedron',
-                color: 0x7000ff,
-                polyCount: '48.1K Polys',
-                author: 'Nexus3D',
-                desc: 'High-poly character helmet asset designed for real-time futuristic games.'
-            },
-            {
-                id: 'mod-3',
-                type: '3d',
-                title: 'Quantum Energy Sphere',
-                category: 'Props',
-                meshType: 'octahedron',
-                color: 0xff007f,
-                polyCount: '12.8K Polys',
-                author: 'Nexus3D',
-                desc: 'Plasma containment crystal node model rendered with real-time lighting.'
-            },
-
-            // 2D IMAGES / ARTWORK
-            {
-                id: 'img-1',
-                type: 'image',
-                title: 'Neo Tokyo Alley - Environment Concept',
-                category: 'Environment',
-                imageUrl: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1000&q=80',
-                author: 'Nexus3D',
-                desc: 'Cyberpunk rain-soaked street environment illustration painted in Photoshop & Blender.'
-            },
-            {
-                id: 'img-2',
-                type: 'image',
-                title: 'Valkyrie Mech Fighter - Character Design',
-                category: 'Concept Art',
-                imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80',
-                author: 'Nexus3D',
-                desc: 'Key art visual design for animated short film antagonist.'
-            },
-            {
-                id: 'img-3',
-                type: 'image',
-                title: 'Quantum Gateway Monolith',
-                category: 'Sci-Fi',
-                imageUrl: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1000&q=80',
-                author: 'Nexus3D',
-                desc: 'Abstract digital matte painting and 3D overlay render.'
-            },
-
-            // ANIMATION MOVIES / VIDEOS
-            {
-                id: 'vid-1',
-                type: 'video',
-                title: 'CYBER AWAKENING - Unreal Engine 5 Cinematic',
-                category: 'Sci-Fi',
-                views: '45K views',
-                duration: '03:42',
-                youtubeId: 'dQw4w9WgXcQ',
-                imageUrl: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80',
-                desc: 'Short cinematic movie made with UE5 Lumen & Nanite workflow.'
-            },
-            {
-                id: 'vid-2',
-                type: 'video',
-                title: 'Blender 4.0 Sci-Fi Speedpaint & Modeling',
-                category: 'Tutorial',
-                views: '28K views',
-                duration: '18:15',
-                youtubeId: 'dQw4w9WgXcQ',
-                imageUrl: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80',
-                desc: 'Full workflow time-lapse tutorial from initial thumbnail sketch to final 3D render.'
-            }
+        let currentMainFilter = 'all';
+        let portfolioItems = JSON.parse(localStorage.getItem('nexus_portfolio_items')) || [
+            { id: 1, type: '3d', title: 'Sci-Fi Mech Walker', category: 'Sci-Fi', desc: 'Hard surface modeled mech asset created in Blender.', fileType: 'default', date: '2026-03' },
+            { id: 2, type: 'image', title: 'Cyberpunk Neon Alley', category: 'Concept Art', desc: 'Digital painting and concept art.', url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop', date: '2026-03' },
+            { id: 3, type: 'video', title: 'CGI Cinematic Trailer', category: 'Sci-Fi', desc: 'Unreal Engine 5 animated short film teaser.', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', date: '2026-03' }
         ];
 
-        // Active Application State Store
-        let mediaStore = [];
-        let activeTypeFilter = 'all';
-        let activeTagFilter = 'all';
-        const activeThreeScenes = {};
-
-        // Window Load Initialization
-        window.onload = function() {
-            loadStoreFromLocalStorage();
-            initHero3DScene();
-            updateCountsAndTags();
-            renderGalleryGrid();
-            setupMobileMenu();
-            setupDropZones();
-        };
-
-        function loadStoreFromLocalStorage() {
-            const saved = localStorage.getItem('nexus_media_vault_v2');
-            if (saved) {
-                try {
-                    mediaStore = JSON.parse(saved);
-                } catch(e) {
-                    mediaStore = [...defaultMediaCatalog];
-                }
-            } else {
-                mediaStore = [...defaultMediaCatalog];
-                saveStoreToLocalStorage();
-            }
-        }
-
-        function saveStoreToLocalStorage() {
-            localStorage.setItem('nexus_media_vault_v2', JSON.stringify(mediaStore));
-        }
-
-        /* ==========================================================================
-           UI NAVIGATION & MODAL CONTROLS
-           ========================================================================== */
-        
-        function setupMobileMenu() {
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            if(btn && menu) {
-                btn.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                });
-            }
-        }
-
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('hidden');
-                if (modalId === 'videoPlayerModal') {
-                    document.getElementById('video-modal-iframe').src = '';
-                }
-            }
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-message').innerText = message;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+        function initApp() {
+            renderPortfolio();
+            updateStats();
+            initHeroViewer();
         }
 
         function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        /* ==========================================================================
-           THREE.JS INTERACTIVE HERO SECTION SCENE
-           ========================================================================== */
-        function initHero3DScene() {
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openUploadModal() {
+            document.getElementById('uploadModal').classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function setUploadType(type) {
+            document.getElementById('upload-media-type').value = type;
+            ['3d', 'image', 'video'].forEach(t => {
+                const btn = document.getElementById(`up-type-${t}`);
+                if(t === type) {
+                    btn.className = 'py-2 text-xs font-bold rounded-lg bg-cyber-primary text-black transition flex items-center justify-center gap-1.5';
+                } else {
+                    btn.className = 'py-2 text-xs font-bold rounded-lg text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5';
+                }
+            });
+
+            const fieldContainer = document.getElementById('dynamic-upload-field');
+            if(type === '3d') {
+                fieldContainer.innerHTML = `<label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">Select 3D File (.gltf, .glb, .obj)</label><input type="file" id="upload-file-input" accept=".gltf,.glb,.obj" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-xs file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-cyber-primary file:text-black">`;
+            } else if(type === 'image') {
+                fieldContainer.innerHTML = `<label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">Upload Image or Direct Image URL</label><input type="file" id="upload-file-input" accept="image/*" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-xs mb-2 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-cyber-accent file:text-white"><input type="text" id="upload-url-input" placeholder="Or paste image URL (https://...)" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2 text-white text-xs">`;
+            } else {
+                fieldContainer.innerHTML = `<label class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1.5">YouTube or Video Embed Link</label><input type="text" id="upload-url-input" placeholder="https://www.youtube.com/watch?v=..." class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-2.5 text-white text-xs">`;
+            }
+        }
+
+        function setMainTypeFilter(type) {
+            currentMainFilter = type;
+            document.querySelectorAll('.type-btn').forEach(btn => {
+                if(btn.dataset.type === type) {
+                    btn.className = 'type-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cyber-primary text-black flex items-center gap-2';
+                } else {
+                    btn.className = 'type-btn px-4 py-2 rounded-xl text-xs font-bold glass-panel text-gray-300 hover:text-white transition-all flex items-center gap-2';
+                }
+            });
+            renderPortfolio();
+        }
+
+        function filterPortfolioItems() {
+            renderPortfolio();
+        }
+
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolio-grid');
+            const emptyState = document.getElementById('empty-state');
+            const searchQuery = document.getElementById('gallery-search').value.toLowerCase();
+
+            const filtered = portfolioItems.filter(item => {
+                const matchType = currentMainFilter === 'all' || item.type === currentMainFilter;
+                const matchSearch = item.title.toLowerCase().includes(searchQuery) || item.category.toLowerCase().includes(searchQuery);
+                return matchType && matchSearch;
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                grid.innerHTML = filtered.map(item => {
+                    let badgeColor = item.type === '3d' ? 'bg-cyber-primary/20 text-cyber-primary border-cyber-primary/30' : (item.type === 'image' ? 'bg-cyber-accent/20 text-cyber-accent border-cyber-accent/30' : 'bg-cyber-secondary/20 text-cyber-secondary border-cyber-secondary/30');
+                    let icon = item.type === '3d' ? 'fa-cube' : (item.type === 'image' ? 'fa-image' : 'fa-film');
+                    
+                    let previewHTML = '';
+                    if(item.type === '3d') {
+                        previewHTML = `<div class="w-full h-56 bg-cyber-bg flex items-center justify-center relative overflow-hidden group"><div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div><i class="fa-solid fa-cube text-5xl text-cyber-primary/40 group-hover:scale-110 transition duration-500"></i><span class="absolute bottom-3 left-3 z-20 text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-cyber-primary border border-cyber-primary/30">Interactive 3D Asset</span></div>`;
+                    } else if(item.type === 'image') {
+                        const imgUrl = item.url || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop';
+                        previewHTML = `<div class="w-full h-56 bg-cyber-bg relative overflow-hidden group"><img src="${imgUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${item.title}"><span class="absolute bottom-3 left-3 z-20 text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-cyber-accent border border-cyber-accent/30">2D Artwork</span></div>`;
+                    } else {
+                        previewHTML = `<div class="w-full h-56 bg-cyber-bg relative overflow-hidden flex items-center justify-center"><i class="fa-solid fa-play text-4xl text-white bg-red-600/80 p-4 rounded-full shadow-lg"></i><span class="absolute bottom-3 left-3 z-20 text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-cyber-secondary border border-cyber-secondary/30">Video Animation</span></div>`;
+                    }
+
+                    return `
+                        <div class="glass-panel rounded-2xl overflow-hidden border border-cyber-border hover:border-cyber-primary/50 transition-all duration-300 flex flex-col justify-between group">
+                            <div>
+                                ${previewHTML}
+                                <div class="p-5">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full border ${badgeColor}"><i class="fa-solid ${icon} mr-1"></i> ${item.category}</span>
+                                        <span class="text-[10px] text-gray-500 font-mono">${item.date || '2026'}</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-white group-hover:text-cyber-primary transition">${item.title}</h3>
+                                    <p class="text-xs text-gray-400 mt-1 line-clamp-2">${item.desc || 'Created with professional studio tools.'}</p>
+                                </div>
+                            </div>
+                            <div class="px-5 pb-5 pt-0 flex items-center justify-between">
+                                <span class="text-[11px] font-mono text-gray-500">ID: #${item.id}</span>
+                                <button onclick="alert('Viewing asset details for ${item.title}')" class="px-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-xs text-white hover:border-cyber-primary transition">View Details</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function updateStats() {
+            const count3d = portfolioItems.filter(i => i.type === '3d').length;
+            const count2d = portfolioItems.filter(i => i.type === 'image').length;
+            const countVid = portfolioItems.filter(i => i.type === 'video').length;
+
+            document.getElementById('stat-3d-count').innerText = count3d;
+            document.getElementById('stat-2d-count').innerText = count2d;
+            document.getElementById('stat-vid-count').innerText = countVid;
+
+            document.getElementById('count-all').innerText = portfolioItems.length;
+            document.getElementById('count-3d').innerText = count3d;
+            document.getElementById('count-image').innerText = count2d;
+            document.getElementById('count-video').innerText = countVid;
+        }
+
+        function handleFormUploadSubmit(e) {
+            e.preventDefault();
+            const type = document.getElementById('upload-media-type').value;
+            const title = document.getElementById('upload-title').value;
+            const category = document.getElementById('upload-category').value;
+            const desc = document.getElementById('upload-desc').value;
+
+            let newItem = {
+                id: Date.now(),
+                type: type,
+                title: title,
+                category: category,
+                desc: desc,
+                date: '2026-10'
+            };
+
+            if(type === 'image') {
+                const urlInput = document.getElementById('upload-url-input');
+                newItem.url = urlInput && urlInput.value ? urlInput.value : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop';
+            } else if(type === 'video') {
+                const urlInput = document.getElementById('upload-url-input');
+                newItem.url = urlInput && urlInput.value ? urlInput.value : 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+            }
+
+            portfolioItems.unshift(newItem);
+            localStorage.setItem('nexus_portfolio_items', JSON.stringify(portfolioItems));
+
+            closeModal('uploadModal');
+            renderPortfolio();
+            updateStats();
+            alert('Successfully uploaded and published to your portfolio vault!');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent successfully. I will get back to you soon.');
+            document.getElementById('contact-form').reset();
+        }
+
+        function initHeroViewer() {
             const container = document.getElementById('hero-3d-canvas');
-            if (!container) return;
+            if(!container) return;
 
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 0, 7);
-
+            const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
             scene.add(ambientLight);
 
-            const pointLight1 = new THREE.PointLight(0x00f0ff, 2, 50);
-            pointLight1.position.set(5, 5, 5);
-            scene.add(pointLight1);
+            const pointLight = new THREE.PointLight(0x00f0ff, 3, 50);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
 
-            const pointLight2 = new THREE.PointLight(0xff007f, 2, 50);
-            pointLight2.position.set(-5, -5, -5);
-            scene.add(pointLight2);
-
-            // Orbit Controls
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 2.0;
-
-            // Create Hero Complex Mesh (Torus Knot Wireframe + Outer Shield Sphere)
-            const geometry = new THREE.TorusKnotGeometry(1.4, 0.4, 120, 16);
+            const geometry = new THREE.IcosahedronGeometry(1.8, 0);
             const material = new THREE.MeshStandardMaterial({
                 color: 0x00f0ff,
-                roughness: 0.2,
-                metalness: 0.8,
-                wireframe: false
-            });
-            const heroMesh = new THREE.Mesh(geometry, material);
-            scene.add(heroMesh);
-
-            // Outer Wireframe Globe
-            const outerGeo = new THREE.IcosahedronGeometry(2.3, 2);
-            const outerMat = new THREE.MeshBasicMaterial({
-                color: 0x7000ff,
                 wireframe: true,
-                transparent: true,
-                opacity: 0.25
+                roughness: 0.2,
+                metalness: 0.8
             });
-            const outerMesh = new THREE.Mesh(outerGeo, outerMat);
-            scene.add(outerMesh);
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
 
-            // Animate Loop
+            camera.position.z = 5;
+
             function animate() {
                 requestAnimationFrame(animate);
-                controls.update();
-                outerMesh.rotation.y -= 0.002;
+                mesh.rotation.x += 0.005;
+                mesh.rotation.y += 0.008;
                 renderer.render(scene, camera);
             }
             animate();
 
-            // Resize listener
             window.addEventListener('resize', () => {
-                if (!container) return;
                 camera.aspect = container.clientWidth / container.clientHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(container.clientWidth, container.clientHeight);
             });
         }
 
-
-        /* ==========================================================================
-           PORTFOLIO FILTERING & GALLERY GRID RENDERER
-           ========================================================================== */
-        
-        function setMainTypeFilter(type) {
-            activeTypeFilter = type;
-            activeTagFilter = 'all';
-
-            // Update Tab UI active states
-            document.querySelectorAll('#type-filter-tabs .type-btn').forEach(btn => {
-                const btnType = btn.getAttribute('data-type');
-                if (btnType === type) {
-                    btn.className = 'type-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cyber-primary text-black flex items-center gap-2';
-                } else {
-                    btn.className = 'type-btn px-4 py-2 rounded-xl text-xs font-bold glass-panel text-gray-300 hover:text-white transition-all flex items-center gap-2';
-                }
-            });
-
-            updateCountsAndTags();
-            renderGalleryGrid();
-        }
-
-        function updateCountsAndTags() {
-            // Count media types
-            const countAll = mediaStore.length;
-            const count3d = mediaStore.filter(m => m.type === '3d').length;
-            const countImage = mediaStore.filter(m => m.type === 'image').length;
-            const countVideo = mediaStore.filter(m => m.type === 'video').length;
-
-            document.getElementById('count-all').innerText = countAll;
-            document.getElementById('count-3d').innerText = count3d;
-            document.getElementById('count-image').innerText = countImage;
-            document.getElementById('count-video').innerText = countVideo;
-
-            // Hero statistics display
-            document.getElementById('stat-3d-count').innerText = count3d;
-            document.getElementById('stat-2d-count').innerText = countImage;
-            document.getElementById('stat-vid-count').innerText = countVideo;
-
-            // Build dynamic tag pills
-            const filteredForTags = activeTypeFilter === 'all' 
-                ? mediaStore 
-                : mediaStore.filter(m => m.type === activeTypeFilter);
-            
-            const categories = ['all', ...new Set(filteredForTags.map(m => m.category || 'General'))];
-
-            const tagsContainer = document.getElementById('category-tag-pills');
-            tagsContainer.innerHTML = '';
-
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                const isActive = activeTagFilter === cat;
-                btn.className = `px-3 py-1 rounded-lg text-[11px] font-medium transition ${
-                    isActive 
-                    ? 'bg-white/20 text-white border border-cyber-primary' 
-                    : 'bg-cyber-card text-gray-400 hover:text-white border border-transparent'
-                }`;
-                btn.innerText = cat === 'all' ? 'All Tags' : `#${cat}`;
-                btn.onclick = () => {
-                    activeTagFilter = cat;
-                    updateCountsAndTags();
-                    renderGalleryGrid();
-                };
-                tagsContainer.appendChild(btn);
-            });
-        }
-
-        function filterPortfolioItems() {
-            renderGalleryGrid();
-        }
-
-        function renderGalleryGrid() {
-            const grid = document.getElementById('portfolio-grid');
-            const emptyState = document.getElementById('empty-state');
-            const searchVal = document.getElementById('gallery-search').value.toLowerCase();
-
-            grid.innerHTML = '';
-
-            let filtered = mediaStore.filter(item => {
-                const matchesType = activeTypeFilter === 'all' || item.type === activeTypeFilter;
-                const matchesTag = activeTagFilter === 'all' || item.category === activeTagFilter;
-                const matchesSearch = item.title.toLowerCase().includes(searchVal) || 
-                                     (item.category && item.category.toLowerCase().includes(searchVal)) ||
-                                     (item.desc && item.desc.toLowerCase().includes(searchVal));
-                return matchesType && matchesTag && matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                emptyState.classList.remove('hidden');
-                return;
-            } else {
-                emptyState.classList.add('hidden');
-            }
-
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'glass-panel rounded-2xl border border-cyber-border overflow-hidden flex flex-col transition-all hover:border-cyber-primary/50 hover:shadow-[0_0_20px_rgba(0,240,255,0.15)] group';
-
-                if (item.type === '3d') {
-                    // 3D MODEL CARD (Three.js WebGL Viewport)
-                    card.innerHTML = `
-                        <div class="h-60 w-full bg-cyber-bg relative model-canvas-container" id="canvas-container-${item.id}">
-                            <div class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-mono text-cyber-primary border border-cyber-primary/30 flex items-center gap-1.5">
-                                <i class="fa-solid fa-cube text-xs"></i> 3D Asset
-                            </div>
-                            <div class="absolute top-3 right-3 z-10 flex gap-1">
-                                <button onclick="resetModelCamera('${item.id}')" title="Reset View" class="bg-black/60 hover:bg-cyber-primary hover:text-black text-gray-300 w-7 h-7 rounded flex items-center justify-center transition border border-white/10 text-xs">
-                                    <i class="fa-solid fa-rotate-left"></i>
-                                </button>
-                                <button onclick="deleteMediaItem('${item.id}')" title="Remove Asset" class="bg-black/60 hover:bg-red-500 text-gray-300 hover:text-white w-7 h-7 rounded flex items-center justify-center transition border border-white/10 text-xs">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </div>
-                            <div class="absolute bottom-2 left-3 z-10 text-[10px] font-mono text-gray-400">
-                                <i class="fa-solid fa-hand-pointer mr-1"></i> Orbit / Scroll Zoom
-                            </div>
-                        </div>
-
-                        <div class="p-5 flex flex-col justify-between flex-grow">
-                            <div>
-                                <h3 class="font-bold text-white text-base group-hover:text-cyber-primary transition mb-1">${item.title}</h3>
-                                <p class="text-xs text-gray-400 font-mono mb-3">#${item.category} • ${item.polyCount || '3D Mesh'}</p>
-                                <p class="text-xs text-gray-300 line-clamp-2 mb-4 leading-relaxed">${item.desc || 'Interactive 3D model asset preview.'}</p>
-                            </div>
-
-                            <div class="pt-3 border-t border-cyber-border/60">
-                                <button onclick="interactModel('${item.id}')" class="w-full py-2 bg-cyber-primary/10 border border-cyber-primary/40 text-cyber-primary hover:bg-cyber-primary hover:text-black rounded-xl text-xs font-bold uppercase transition flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i> Shift Material Hue
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    grid.appendChild(card);
-
-                    // Initialize Three.js scene deferred
-                    setTimeout(() => initModelCard3DScene(item), 50);
-
-                } else if (item.type === 'image') {
-                    // 2D ARTWORK & IMAGE CARD
-                    card.innerHTML = `
-                        <div class="h-60 w-full bg-black relative overflow-hidden cursor-pointer" onclick="openImageViewer('${item.imageUrl.replace(/'/g, "\\'")}', '${item.title.replace(/'/g, "\\'")}', '${item.category}', '${(item.desc || '').replace(/'/g, "\\'")}')">
-                            <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                            
-                            <div class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-mono text-cyber-accent border border-cyber-accent/30 flex items-center gap-1.5">
-                                <i class="fa-solid fa-image text-xs"></i> 2D Art
-                            </div>
-
-                            <div class="absolute top-3 right-3 z-10">
-                                <button onclick="event.stopPropagation(); deleteMediaItem('${item.id}')" title="Remove Item" class="bg-black/60 hover:bg-red-500 text-gray-300 hover:text-white w-7 h-7 rounded flex items-center justify-center transition border border-white/10 text-xs">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </div>
-
-                            <div class="absolute bottom-3 right-3 bg-black/80 px-2.5 py-1 rounded-lg text-xs text-white opacity-0 group-hover:opacity-100 transition duration-300 flex items-center gap-1">
-                                <i class="fa-solid fa-expand"></i> View Full Art
-                            </div>
-                        </div>
-
-                        <div class="p-5 flex flex-col justify-between flex-grow">
-                            <div>
-                                <h3 class="font-bold text-white text-base group-hover:text-cyber-accent transition mb-1">${item.title}</h3>
-                                <p class="text-xs text-gray-400 font-mono mb-3">#${item.category} • Digital Artwork</p>
-                                <p class="text-xs text-gray-300 line-clamp-2 mb-4 leading-relaxed">${item.desc || 'Digital image artwork showcase.'}</p>
-                            </div>
-
-                            <div class="pt-3 border-t border-cyber-border/60">
-                                <button onclick="openImageViewer('${item.imageUrl.replace(/'/g, "\\'")}', '${item.title.replace(/'/g, "\\'")}', '${item.category}', '${(item.desc || '').replace(/'/g, "\\'")}')" class="w-full py-2 bg-cyber-accent/10 border border-cyber-accent/40 text-cyber-accent hover:bg-cyber-accent hover:text-white rounded-xl text-xs font-bold uppercase transition flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-maximize"></i> Open High-Res Lightbox
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    grid.appendChild(card);
-
-                } else if (item.type === 'video') {
-                    // ANIMATION MOVIE / VIDEO CARD
-                    card.innerHTML = `
-                        <div class="h-60 w-full bg-black relative overflow-hidden cursor-pointer" onclick="openVideoPlayer('${item.youtubeId}', '${item.title.replace(/'/g, "\\'")}')">
-                            <img src="${item.imageUrl || 'https://img.youtube.com/vi/' + item.youtubeId + '/hqdefault.jpg'}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                            
-                            <!-- Play Button -->
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-12 h-12 rounded-full bg-cyber-secondary/80 text-white flex items-center justify-center glow-secondary group-hover:scale-110 transition duration-300">
-                                    <i class="fa-solid fa-play ml-1"></i>
-                                </div>
-                            </div>
-
-                            <div class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-mono text-purple-300 border border-cyber-secondary/30 flex items-center gap-1.5">
-                                <i class="fa-solid fa-film text-xs"></i> Video / Movie
-                            </div>
-
-                            <div class="absolute top-3 right-3 z-10">
-                                <button onclick="event.stopPropagation(); deleteMediaItem('${item.id}')" title="Remove Video" class="bg-black/60 hover:bg-red-500 text-gray-300 hover:text-white w-7 h-7 rounded flex items-center justify-center transition border border-white/10 text-xs">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </div>
-
-                            <span class="absolute bottom-3 right-3 bg-black/80 px-2 py-0.5 rounded text-[10px] font-mono text-gray-300">
-                                ${item.duration || 'Video Clip'}
-                            </span>
-                        </div>
-
-                        <div class="p-5 flex flex-col justify-between flex-grow">
-                            <div>
-                                <h3 class="font-bold text-white text-base group-hover:text-cyber-secondary transition mb-1 line-clamp-2">${item.title}</h3>
-                                <p class="text-xs text-gray-400 font-mono mb-3">#${item.category} • YouTube Movie</p>
-                                <p class="text-xs text-gray-300 line-clamp-2 mb-4 leading-relaxed">${item.desc || 'Video showcase clip.'}</p>
-                            </div>
-
-                            <div class="pt-3 border-t border-cyber-border/60">
-                                <button onclick="openVideoPlayer('${item.youtubeId}', '${item.title.replace(/'/g, "\\'")}')" class="w-full py-2 bg-cyber-secondary/20 border border-cyber-secondary/50 text-purple-300 hover:bg-cyber-secondary hover:text-white rounded-xl text-xs font-bold uppercase transition flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-circle-play"></i> Watch Movie Player
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    grid.appendChild(card);
-                }
-            });
-        }
-
-        /* ==========================================================================
-           THREE.JS CARD RENDERER & UTILITIES
-           ========================================================================== */
-        
-        function initModelCard3DScene(item) {
-            const container = document.getElementById(`canvas-container-${item.id}`);
-            if (!container) return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-            camera.position.set(0, 0, 4);
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            container.appendChild(renderer.domElement);
-
-            // Lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-            scene.add(ambientLight);
-
-            const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
-            dirLight.position.set(3, 4, 5);
-            scene.add(dirLight);
-
-            const fillLight = new THREE.DirectionalLight(item.color || 0x00f0ff, 1.5);
-            fillLight.position.set(-3, -2, -2);
-            scene.add(fillLight);
-
-            // Controls
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-
-            // Mesh Generation
-            let geometry;
-            switch(item.meshType) {
-                case 'torusKnot': geometry = new THREE.TorusKnotGeometry(0.8, 0.25, 64, 16); break;
-                case 'icosahedron': geometry = new THREE.IcosahedronGeometry(1, 1); break;
-                case 'octahedron': geometry = new THREE.OctahedronGeometry(1.1); break;
-                case 'cylinder': geometry = new THREE.CylinderGeometry(0.7, 0.7, 1.5, 32); break;
-                case 'cone': geometry = new THREE.ConeGeometry(0.9, 1.6, 32); break;
-                default: geometry = new THREE.DodecahedronGeometry(1); break;
-            }
-
-            const material = new THREE.MeshStandardMaterial({
-                color: item.color || 0x00f0ff,
-                roughness: 0.3,
-                metalness: 0.7
-            });
-
-            const mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-
-            activeThreeScenes[item.id] = { scene, camera, renderer, controls, mesh };
-
-            function animate() {
-                requestAnimationFrame(animate);
-                controls.update();
-                mesh.rotation.y += 0.005;
-                renderer.render(scene, camera);
-            }
-            animate();
-        }
-
-        function resetModelCamera(id) {
-            const instance = activeThreeScenes[id];
-            if (instance) {
-                instance.camera.position.set(0, 0, 4);
-                instance.controls.reset();
-                showToast("3D Camera view reset");
-            }
-        }
-
-        function interactModel(id) {
-            const instance = activeThreeScenes[id];
-            if (instance) {
-                const randomColor = Math.floor(Math.random() * 16777215);
-                instance.mesh.material.color.setHex(randomColor);
-                showToast("3D Material hue randomized!");
-            }
-        }
-
-        /* ==========================================================================
-           MODALS & VIEWERS (2D IMAGE LIGHTBOX & VIDEO PLAYER)
-           ========================================================================== */
-        
-        function openImageViewer(url, title, category, desc) {
-            document.getElementById('img-modal-title').innerText = title;
-            document.getElementById('img-modal-tag').innerText = `#${category}`;
-            document.getElementById('img-modal-desc').innerText = desc || 'High-resolution artwork view.';
-            document.getElementById('img-modal-src').src = url;
-            document.getElementById('img-modal-download').href = url;
-            openModal('imageViewerModal');
-        }
-
-        function openVideoPlayer(youtubeId, title) {
-            document.getElementById('video-modal-title').innerText = title;
-            document.getElementById('video-modal-iframe').src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
-            openModal('videoPlayerModal');
-        }
-
-        function deleteMediaItem(id) {
-            if (confirm("Are you sure you want to remove this item from your vault?")) {
-                mediaStore = mediaStore.filter(item => item.id !== id);
-                saveStoreToLocalStorage();
-                updateCountsAndTags();
-                renderGalleryGrid();
-                showToast("Item deleted from vault.");
-            }
-        }
-
-
-        /* ==========================================================================
-           UNIFIED UPLOAD SYSTEM (3D MODELS, 2D IMAGES, VIDEOS)
-           ========================================================================== */
-        
-        function openUploadModal() {
-            setUploadType('3d');
-            openModal('uploadModal');
-        }
-
-        function setUploadType(type) {
-            document.getElementById('upload-media-type').value = type;
-
-            const btn3d = document.getElementById('up-type-3d');
-            const btnImg = document.getElementById('up-type-image');
-            const btnVid = document.getElementById('up-type-video');
-
-            const field3d = document.getElementById('field-3d');
-            const fieldImg = document.getElementById('field-image');
-            const fieldVid = document.getElementById('field-video');
-
-            // Reset buttons styling
-            [btn3d, btnImg, btnVid].forEach(b => {
-                b.className = 'py-2 text-xs font-bold rounded-lg text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5';
-            });
-
-            // Hide fields
-            [field3d, fieldImg, fieldVid].forEach(f => f.classList.add('hidden'));
-
-            if (type === '3d') {
-                btn3d.className = 'py-2 text-xs font-bold rounded-lg bg-cyber-primary text-black transition flex items-center justify-center gap-1.5';
-                field3d.classList.remove('hidden');
-            } else if (type === 'image') {
-                btnImg.className = 'py-2 text-xs font-bold rounded-lg bg-cyber-accent text-white transition flex items-center justify-center gap-1.5';
-                fieldImg.classList.remove('hidden');
-            } else if (type === 'video') {
-                btnVid.className = 'py-2 text-xs font-bold rounded-lg bg-cyber-secondary text-white transition flex items-center justify-center gap-1.5';
-                fieldVid.classList.remove('hidden');
-            }
-        }
-
-        function setupDropZones() {
-            // 3D File Drop Zone
-            const zone3d = document.getElementById('drop-zone-3d');
-            const fileInput3d = document.getElementById('file-input-3d');
-            if(zone3d) zone3d.addEventListener('click', () => fileInput3d.click());
-
-            // Image File Drop Zone
-            const zoneImg = document.getElementById('drop-zone-img');
-            const fileInputImg = document.getElementById('file-input-img');
-            if(zoneImg) zoneImg.addEventListener('click', () => fileInputImg.click());
-        }
-
-        function previewFileSelected(input, targetId) {
-            const target = document.getElementById(targetId);
-            if (input.files && input.files[0]) {
-                target.innerText = `File Loaded: ${input.files[0].name}`;
-                target.classList.remove('hidden');
-            }
-        }
-
-        function handleImageFileSelect(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImageUrl(e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function previewImageUrl(url) {
-            const box = document.getElementById('img-preview-box');
-            const img = document.getElementById('img-preview-element');
-            if (url && url.length > 5) {
-                img.src = url;
-                box.classList.remove('hidden');
-            } else {
-                box.classList.add('hidden');
-            }
-        }
-
-        function handleFormUploadSubmit(e) {
-            e.preventDefault();
-            const mediaType = document.getElementById('upload-media-type').value;
-            const title = document.getElementById('upload-title').value;
-            const category = document.getElementById('upload-category').value;
-            const desc = document.getElementById('upload-description').value;
-
-            const newItem = {
-                id: `usr-${Date.now()}`,
-                type: mediaType,
-                title: title,
-                category: category,
-                desc: desc,
-                author: 'You (Creator)'
-            };
-
-            if (mediaType === '3d') {
-                newItem.meshType = category === 'Sci-Fi' ? 'icosahedron' : (category === 'Props' ? 'octahedron' : 'torusKnot');
-                newItem.color = 0x00f0ff;
-                newItem.polyCount = 'Custom Upload';
-            } else if (mediaType === 'image') {
-                const urlInput = document.getElementById('upload-image-url').value;
-                const previewImg = document.getElementById('img-preview-element').src;
-
-                newItem.imageUrl = urlInput || previewImg || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80';
-            } else if (mediaType === 'video') {
-                const vidUrl = document.getElementById('upload-video-url').value;
-                let ytId = 'dQw4w9WgXcQ';
-                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-                const match = vidUrl.match(regExp);
-                if (match && match[2].length === 11) ytId = match[2];
-
-                newItem.youtubeId = ytId;
-                newItem.imageUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-                newItem.duration = 'New Movie';
-            }
-
-            // Save into store and local storage
-            mediaStore.unshift(newItem);
-            saveStoreToLocalStorage();
-
-            // Refresh UI View
-            updateCountsAndTags();
-            renderGalleryGrid();
-            closeModal('uploadModal');
-            showToast(`New ${mediaType.toUpperCase()} item "${title}" added to portfolio!`);
-
-            // Reset form
-            e.target.reset();
-            document.getElementById('img-preview-box').classList.add('hidden');
-            document.getElementById('file-3d-name').classList.add('hidden');
-        }
-
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            showToast("Message sent! I will respond to your email shortly.");
-            e.target.reset();
-        }
+        window.onload = initApp;
     </script>
 </body>
 </html>
